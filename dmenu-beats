@@ -1,7 +1,7 @@
 #!/bin/sh
 
 notification(){
-	notify-send "Playing now: " "$@" --icon=media-tape
+	notify-send "Playing now: $choice" "$@" --icon=media-tape
 }
 
 menu(){
