@@ -10,11 +10,13 @@ menu(){
 	printf "Box Lofi\n"
 	printf "The Bootleg Boy\n"
 	printf "Radio Spinner\n"
-	printf "SmoothChill"
+	printf "SmoothChill\n"
+	printf "VaporToNite\n"
+	printf "Luiger"
 }
 
 main() {
-	choice=$(menu | dmenu -i -p "Dmenu-beats")
+	choice=$(menu | dmenu -i -l 5 -p "Dmenu-beats")
 	printf "$choice\n"
 
 	case $choice in
@@ -46,6 +48,16 @@ main() {
 		"SmoothChill")
 			notification ;
 				mpv "https://media-ssl.musicradio.com/SmoothChill"
+			break
+			;;
+		"VaporToNite")
+			notification ;
+				mpv "https://www.youtube.com/watch?v=lS--6plYjYo"
+			break
+			;;
+		"Luiger")
+			notification ;
+				mpv "https://www.youtube.com/watch?v=y-kG6BiZOYs"
 			break
 			;;
 	esac
