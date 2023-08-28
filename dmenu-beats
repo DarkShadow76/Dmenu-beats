@@ -7,14 +7,24 @@ RADIO_LIST=("Lofi Girl"
             "Box Lofi"
             "The Bootleg Boy"
             "Radio Spinner"
-            "SmoothChill")
+            "SmoothChill"
+            "Radio ROKS Rock-Ballads"
+            "Real Punk Radio"
+            "STAR FM Hard Rock"
+            "Radio Anime 24"
+            "Riding Retro Radio")
 
 URL=("https://play.streamafrica.net/lofiradio"
     "http://stream.zeno.fm/fyn8eh3h5f8uv"
     "http://stream.zeno.fm/f3wvbbqmdg8uv"
     "http://stream.zeno.fm/0r0xa792kwzuv"
     "https://live.radiospinner.com/lofi-hip-hop-64"
-    "https://media-ssl.musicradio.com/SmoothChill")
+    "https://media-ssl.musicradio.com/SmoothChill"
+    "http://online.radioroks.ua/RadioROKS_Ballads"
+    "http://149.56.155.73:8080"
+    "https://stream.starfm.de/hardrock/mp3-192"
+    "http://91.232.4.33:7028"
+    "https://www.ridingretroradio.com/streamInfo.m3u")
 
 notification(){
     notify-send "Playing now: " "$@" --icon=media-tape
