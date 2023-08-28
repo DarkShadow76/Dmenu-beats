@@ -1,66 +1,39 @@
 #!/bin/sh
 
+ARGS="--volume=60"
+
+RADIO_LIST=("Lofi Girl"
+            "Chillhop"
+            "Box Lofi"
+            "The Bootleg Boy"
+            "Radio Spinner"
+            "SmoothChill")
+
+URL=("https://play.streamafrica.net/lofiradio"
+    "http://stream.zeno.fm/fyn8eh3h5f8uv"
+    "http://stream.zeno.fm/f3wvbbqmdg8uv"
+    "http://stream.zeno.fm/0r0xa792kwzuv"
+    "https://live.radiospinner.com/lofi-hip-hop-64"
+    "https://media-ssl.musicradio.com/SmoothChill")
+
 notification(){
-	notify-send "Playing now: $choice" "$@" --icon=media-tape
+    notify-send "Playing now: " "$@" --icon=media-tape
 }
 
 menu(){
-	printf "Lofi Girl\n"
-	printf "Chillhop\n"
-	printf "Box Lofi\n"
-	printf "The Bootleg Boy\n"
-	printf "Radio Spinner\n"
-	printf "SmoothChill\n"
-	printf "VaporToNite\n"
-	printf "Luiger"
+    for ((i=0; i<${#RADIO_LIST[@]}; i++)); do
+        printf "$((i+1)). ${RADIO_LIST[$i]}\n"
+    done
 }
 
 main() {
-	choice=$(menu | dmenu -i -l 5 -p "Dmenu-beats")
-	printf "$choice\n"
+    choice=$(menu | dmenu -i -l 5 -p "Dmenu-beats" | cut -d' ' -f1 | tr -d '.')
+    printf "${RADIO_LIST[$choice-1]}\n"
 
-	case $choice in
-		"Lofi Girl")
-			notification ;
-				mpv "https://play.streamafrica.net/lofiradio"
-			break
-			;;
-		"Chillhop")
-			notification ;
-				mpv "http://stream.zeno.fm/fyn8eh3h5f8uv"
-			break
-			;;
-		"Box Lofi")
-			notification ;
-				mpv "http://stream.zeno.fm/f3wvbbqmdg8uv"
-			break
-			;;
-		"The Bootleg Boy")
-			notification ;
-				mpv "http://stream.zeno.fm/0r0xa792kwzuv"
-			break
-			;;
-		"Radio Spinner")
-			notification ;
-				mpv "https://live.radiospinner.com/lofi-hip-hop-64"
-			break
-			;;
-		"SmoothChill")
-			notification ;
-				mpv "https://media-ssl.musicradio.com/SmoothChill"
-			break
-			;;
-		"VaporToNite")
-			notification ;
-				mpv "https://www.youtube.com/watch?v=lS--6plYjYo"
-			break
-			;;
-		"Luiger")
-			notification ;
-				mpv "https://www.youtube.com/watch?v=y-kG6BiZOYs"
-			break
-			;;
-	esac
+    if [[ $choice -ge 1 && $choice -le ${#RADIO_LIST[@]} ]]; then
+        notification "${RADIO_LIST[$choice-1]} ☕️🎶"
+        st -e mpv $ARGS --title="radio-mpv" "${URL[$choice-1]}"
+    fi
 }
 
-pkill -f http || main
+pkill -f radio-mpv || main
